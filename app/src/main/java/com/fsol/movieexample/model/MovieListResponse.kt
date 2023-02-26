@@ -8,7 +8,7 @@ data class MovieListResponse(
 	val metadata: Metadata? = null,
 
 	@field:SerializedName("data")
-	val data: List<DataItem?>? = null
+	val movies: List<MovieItem>? = null
 )
 
 data class Metadata(
@@ -26,7 +26,7 @@ data class Metadata(
 	val pageCount: Int? = null
 )
 
-data class DataItem(
+data class MovieItem(
 
 	@field:SerializedName("country")
 	val country: String? = null,
