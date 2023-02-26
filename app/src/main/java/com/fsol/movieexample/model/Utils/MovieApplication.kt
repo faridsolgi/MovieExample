@@ -1,4 +1,4 @@
-package com.fsol.movieexample.Utils
+package com.fsol.movieexample.model.Utils
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
