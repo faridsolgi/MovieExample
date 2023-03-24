@@ -26,12 +26,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+
 
 }
 
@@ -62,9 +68,11 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
     //activity
-    implementation 'androidx.activity:activity-ktx:1.8.0-alpha01'
+    implementation 'androidx.activity:activity-ktx:1.6.1'
     //fragment
     implementation 'androidx.fragment:fragment-ktx:1.6.0-alpha06'
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.8'
 
 }
 
