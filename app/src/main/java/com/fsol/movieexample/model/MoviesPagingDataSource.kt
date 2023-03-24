@@ -21,7 +21,7 @@ class MoviesPagingDataSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieItem> {
         val pageNumber = params.key ?: 1
         return try {
-            val response = movieApi.movieList(pageNumber).firstOrNull()
+            val response = movieApi.movieList(pageNumber)
             var nextPageNumber: Int? = null
             if (pageNumber < response?.metadata?.pageCount!!) {
                 nextPageNumber = pageNumber+1
