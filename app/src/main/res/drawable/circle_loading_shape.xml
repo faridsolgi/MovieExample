@@ -6,15 +6,19 @@
         android:right="48dp"
         android:top="48dp" >
 
-    <shape android:shape="oval">
-        <stroke
-            android:width="2dp"
-            android:color="?attr/colorOnSurfaceVariant" />
-        <size
-            android:width="48dp"
-            android:height="48dp" />
 
-    </shape>
+        <shape
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="ring"
+            android:thickness="2dp"
+            android:useLevel="false">
+            <size android:height="48dp" android:width="48dp"/>
+            <gradient
+                android:startColor="?attr/colorOutline"
+                android:centerColor="?attr/colorOutline"
+                android:endColor="?attr/backgroundColor"
+                android:angle="220" />
+        </shape>
 </item>
 
     </layer-list>
