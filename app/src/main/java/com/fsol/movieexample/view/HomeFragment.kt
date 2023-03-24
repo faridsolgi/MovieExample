@@ -1,7 +1,9 @@
 package com.fsol.movieexample.view
 
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fsol.movieexample.databinding.FragmentHomeBinding
 import com.fsol.movieexample.model.Utils.initRecycler
@@ -32,6 +34,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.movieList().collectLatest {
                 movieAdapter.submitData(it)
+            }
+
+        }
+
+        movieAdapter.addLoadStateListener {
+            if(it.refresh is LoadState.Loading||
+                        it.append is LoadState.Loading){
+                binding.progressLoadAllMovie.visibility= View.VISIBLE
+            }else{
+                binding.progressLoadAllMovie.visibility = View.GONE
             }
         }
 
