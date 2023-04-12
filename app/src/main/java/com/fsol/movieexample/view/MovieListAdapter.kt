@@ -21,6 +21,11 @@ class MovieListAdapter @Inject constructor(
 ) :
     PagingDataAdapter<MovieItem, MovieListAdapter.MovieListAdapterViewHolder>(MovieDiffCallBack()) {
 
+
+    var setOnItemClick : SetOnItemClick? = null
+   private val _setOnItemClick : SetOnItemClick get() =  setOnItemClick ?: error("must init onClick")
+
+
     override fun onBindViewHolder(holder: MovieListAdapterViewHolder, position: Int) {
        holder.onBind(getItem(position))
     }
@@ -28,7 +33,7 @@ class MovieListAdapter @Inject constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListAdapterViewHolder {
         val inflater = LayoutInflater.from(context)
         val binding: ItemMoviesMainBinding = ItemMoviesMainBinding.inflate(inflater, parent, false)
-        return MovieListAdapterViewHolder(binding)
+        return MovieListAdapterViewHolder(binding,_setOnItemClick)
     }
 
     class MovieDiffCallBack : DiffUtil.ItemCallback<MovieItem>() {
@@ -42,7 +47,7 @@ class MovieListAdapter @Inject constructor(
 
     }
 
-    class MovieListAdapterViewHolder(val binding: ItemMoviesMainBinding) :
+    class MovieListAdapterViewHolder(val binding: ItemMoviesMainBinding,val onItemClick: SetOnItemClick) :
         RecyclerView.ViewHolder(binding.root) {
             fun  onBind (item: MovieItem?) {
                 try {
@@ -63,6 +68,10 @@ class MovieListAdapter @Inject constructor(
                                 .into(binding.movieposter)
                         }
 
+                    binding.root.setOnClickListener {
+                    onItemClick.onMovieItemClickListener(item)
+                    }
+
                 }catch (e:Exception){
                     e.printStackTrace()
                 }
@@ -71,5 +80,7 @@ class MovieListAdapter @Inject constructor(
 
     }
 
-
+    interface  SetOnItemClick{
+        fun onMovieItemClickListener(item: MovieItem?)
+    }
 }
